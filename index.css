@@ -1,61 +1,92 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    }
-    
-    header {
-    background-color: #333;
-    color: rgb(225, 219, 26);
-    padding: 0/5rem;
-    text-align: center;
-    font-family:  B Nikoo;
-    font-size: small;
-    font-weight: bold;
-    }
-    
-    header nav ul {
-    list-style: none;
-    padding: 0;
-    }
-    
-    header nav ul li {
-    display: inline;
-    margin: 0 1rem;
-    }
-    
-    header nav ul li a {
-    color: rgb(18, 201, 230);
-    text-decoration: none;
-    font-size: small;
-    font-family: B Mah;
-    }
-    
-    .hero {
     background-color: #f4f4f4;
-    color: crimson;
-    padding: 0.5rem;
+}
+
+header {
+    background-color: #2c3e50; /* آبی تیره */
+    color: #090909;
     text-align: center;
-    font-family: بهترین دستگاه های صنعتی;
-    font-size: small;
-    
-    }
-    
-    .products {
-    padding: 1rem;
-    text-align: right;
-    font-size: small;
-    }
-    
-    footer {
-    background-color: #333;
-    color: white;
-    padding: 0/5rem;
-    position: fixed;
-    width: 100%;
-    bottom:0;
+    font-family: 'B Titr';
+    font-size: 2rem;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #188b84;
+    font-size: 1.25rem;
+    border-radius: 20px;
+}
+
+nav a {
+    display: flex;
+    color: #fff;
+    padding: 14px 20px;
+    text-decoration: none;
     text-align: center;
-    font-size: larger;
-    
-    }
+    justify-content: center;
+    font-family: 'B Badr';
+}
+
+.MENU {
+    display: flex;
+    color: #dcdcdc;
+    flex-wrap: wrap;
+    border-radius: 8px;
+    background-color: #ecb94a;
+    justify-content: right;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+.MENU a {
+    display: flex;
+    color: #ffffff;
+    padding: 14px 20px;
+    text-decoration: none;
+    margin: 0;
+    flex-wrap: wrap;
+    text-align: center;
+    border-radius: 40px;
+    font-size: 1rem;
+}
+
+nav a:hover, .MENU a:hover {
+    background-color: #555;
+    border-radius: 20px;
+}
+
+.container {
+    padding: 20px;
+}
+
+footer {
+    background-color: dimgrey;
+    text-align: center;
+    font-family: 'B Lotus';
+    padding: 10px;
+    color: #fff;
+}
+
+a {
+    font-family: 'B Badr';
+    font-weight: bold;
+}
+
+#tr {
+    border-radius: 20px;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    font-size: 1rem;
+    color: #dcdcdc;
+}
