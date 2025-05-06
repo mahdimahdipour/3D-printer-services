@@ -1,33 +1,45 @@
 <?php
-include("bala.html");
+session_start(); 
+$_SESSION["login"] = true;
+
+include("heder.php");
 ?>
-<!DOCTYPE html>
-<html lang="fa">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحه ورود</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            text-align: right;
+        }
+    </style>
 </head>
-<body>
-    <div class="container d-flex flex-column align-items-center justify-content-center vh-100"> <!-- Flexbox container -->
-        <form action="login_action.php" method="post" class="w-100" style="max-width: 400px;"> <!-- Center the form -->
-            <div class="form-group text-right"> <!-- Right-align text -->
-                <input type="text" name="username" placeholder="نام خانوادگی" class="form-control text-right">
+
+
+<main class="container text-right">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="login_action.php" method="post" class="text-center">
+                    <div class="form-group">
+                        <label for="username"></label>
+                        <input type="text" name="username" id="username" placeholder="نام کاربری" class="form-control d-block mx-auto">
+                    </div>
+                    <div class="form-group">
+                        <label for="password"></label>
+                        <input type="password" name="password" id="password" placeholder="کلمه عبور" class="form-control d-block mx-auto">
+                    </div>
+                    <button type="submit" class="btn btn-success">ورود</button>
+                </form>
             </div>
-            <div class="form-group text-right"> <!-- Right-align text -->
-                <input type="password" name="password" placeholder="کلمه عبور" class="form-control text-right">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="ورود" class="btn btn-primary w-100">
-            </div>
-        </form>
+        </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapped.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
+<?php
+include("footer.html");
+?>
 </body>
 </html>
-<?php
-include("paeen.html");
-?>

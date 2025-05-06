@@ -1,99 +1,127 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+include("heder.php");
+?>
+
 <!DOCTYPE html>
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحه</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .nav-link {
-            display: inline-block;
-            margin: 5px; /* Space between images */
-            overflow: hidden; /* Prevent image overflow */
-        }
-        #tr {
-            width: 100%;
-            height: 300px; 
-            object-fit: cover; 
-            transition: transform 0.3s ease-in-out; 
-        }
-        #tr:hover {
-            transform: scale(1.05); 
-        }
-        .nav-item {
-            flex: 0 0 100%;  
-            max-width: 100%;
-        }
-        /* Responsive adjustments */
-        @media (min-width: 576px) { 
-            .nav-item {
-                flex: 0 0 50%;
-                max-width: 50%;
-            }
-        }
-        @media (min-width: 992px) { /* For laptops and larger */
-            .nav-item {
-                flex: 0 0 33.33%;
-                max-width: 33.33%;
-            }
-        }
-    </style>
+    <title>اسلایدشو</title>
 </head>
-<body>
 
-<?php include("heder.php"); ?>
+<section class="container my-4 daily-report">
+    <div class="row justify-content-center">
+        <?php
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "myadmin";
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
 
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item">
-        <a class="nav-link" href="#"><img src="photo/9.jpg" id="tr"></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><img src="photo/15.png" id="tr"></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><img src="photo/10.jpg" id="tr"></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><img src="photo/31.jpg" id="tr"></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><img src="photo/21.jpg" id="tr"></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><img src="photo/11.jpg" id="tr"></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><img src="photo/23.jpg" id="tr"></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><img src="photo/30.jpg" id="tr"></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><img src="photo/28.jpg" id="tr"></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><img src="photo/34.png" id="tr"></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><img src="photo/32.jpg" id="tr"></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><img src="photo/35.jpg" id="tr"></a>
-      </li>
-    </ul>
-  </div>
-</nav>
+        $sql = "SELECT * FROM `items`";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $imageId = intval($row["id"]); 
+                $imageLink = ($imageId >= 1 && $imageId <= 12) ? $imageId . ".php" : "default.php";
+
+                echo '<div class="col-12 col-sm-6 col-md-4 d-flex justify-content-center align-items-center mb-3">';
+                echo '<div class="image-container text-center">';
+                echo '<a href="' . htmlspecialchars($imageLink, ENT_QUOTES, 'UTF-8') . '">';
+                echo '<img src="photo/' . htmlspecialchars($row["image"], ENT_QUOTES, 'UTF-8') . '" alt="تصویر">';
+                echo '</a>';
+                echo '<p>' . htmlspecialchars($row["text"], ENT_QUOTES, 'UTF-8') . '</p>';
+                
+                if (isset($_SESSION["role"]) && $_SESSION["role"] == 'admin') {
+                    echo '<button class="edit-button" onclick="toggleActionButtons(this)"><i class="fas fa-edit"></i></button>';
+                    echo '<div class="action-buttons">';
+                    echo '<form action="edit.php" method="post" enctype="multipart/form-data" class="mb-2">';
+                    echo '<input type="hidden" name="id" value="' . $row["id"] . '">';
+                    echo '<input type="text" name="description" placeholder="توضیح جدید" class="form-control mb-2" required>';
+                    echo '<input type="file" name="image" class="form-control mb-2" required>';
+                    echo '<button type="submit" class="btn btn-primary w-100 mb-2">ویرایش</button>';
+                    echo '</form>';
+                    echo '<form action="delete.php" method="post">';
+                    echo '<input type="hidden" name="id" value="' . $row["id"] . '">';
+                    echo '<button type="submit" class="btn btn-danger w-100 mb-2">حذف</button>';
+                    echo '</form>';
+                    echo '</div>';
+                }
+                echo '</div>';
+                echo '</div>';
+            }
+        } else {
+            echo "هیچ تصویری پیدا نشد.";
+        }
+        $conn->close();
+        ?>
+    </div>
+</section>
+
+<style>
+.image-container {
+    width: 300px; /* حفظ عرض مستطیلی */
+    height: auto;
+    overflow: hidden;
+    margin: 0 0px; /* فاصله‌ی افقی بسیار کم برای نزدیک‌تر شدن تصاویر */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 8px;
+    border: 4px solid #ddd;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.image-container img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.image-container p {
+    margin: 4px 0;
+    font-weight: bold;
+    color: #333;
+    font-size: 0.9rem;
+    text-align: center;
+}
+</style>
+
+<!-- لینک جاوااسکریپت بوت استرپ -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- لینک جاوااسکریپت آیکون‌های بوت استرپ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 
 <?php include("footer.php"); ?>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- لینک جاوااسکریپت برای عملکرد دکمه مداد -->
+<script>
+    function toggleActionButtons(button) {
+        var actionButtons = button.nextElementSibling;
+        if (actionButtons.style.display === "none" || actionButtons.style.display === "") {
+            actionButtons.style.display = "block";
+        } else {
+            actionButtons.style.display = "none";
+        }
+    }
+</script>
+
 </body>
 </html>

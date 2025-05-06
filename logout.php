@@ -1,11 +1,13 @@
-
 <?php
-include("heder.php");
+session_start();
 unset($_SESSION["login"]);
+header("Location: index.php"); 
+exit();
 ?>
-<script>2
+
+<script>
     location.replace("index.php");
 </script>
 <?php
-include("paeen.html")
+include("pagefooter.html");
 ?>

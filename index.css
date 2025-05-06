@@ -2,41 +2,44 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: blueviolet;
+    color: brown;
+    direction: rtl;
 }
 
 header {
-    background-color: #2c3e50; /* آبی تیره */
-    color: #090909;
+    background-color: #0a3752; /* آبی تیره */
     text-align: center;
-    font-family: 'B Titr';
+    font-family: 'B Titr';   
     font-size: 2rem;
     border-radius: 15px;
-    padding: 10px;
+    padding: 50px;
+   
 }
 
 nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #188b84;
-    font-size: 1.25rem;
+    background-color: #8b2018;
+    font-size: 50rem;
     border-radius: 20px;
 }
 
 nav a {
     display: flex;
-    color: #fff;
+    color: rgb(7, 119, 194);
     padding: 14px 20px;
     text-decoration: none;
     text-align: center;
     justify-content: center;
     font-family: 'B Badr';
+    font-size: large;
 }
 
 .MENU {
     display: flex;
-    color: #dcdcdc;
+    color: #9e1d1d;
     flex-wrap: wrap;
     border-radius: 8px;
     background-color: #ecb94a;
@@ -45,21 +48,10 @@ nav a {
     padding: 10px;
 }
 
-.MENU a {
-    display: flex;
-    color: #ffffff;
-    padding: 14px 20px;
-    text-decoration: none;
-    margin: 0;
-    flex-wrap: wrap;
-    text-align: center;
-    border-radius: 40px;
-    font-size: 1rem;
-}
 
 nav a:hover, .MENU a:hover {
     background-color: #555;
-    border-radius: 20px;
+    border-radius: 30px;
 }
 
 .container {
@@ -77,10 +69,13 @@ footer {
 a {
     font-family: 'B Badr';
     font-weight: bold;
+    border-radius: 15px;
+    border-radius: 20px;   
 }
 
-#tr {
-    border-radius: 20px;
+tr {
+    border-radius: 15px;
+    border-radius: 20px;   
 }
 
 ul {
@@ -88,5 +83,60 @@ ul {
     flex-wrap: wrap;
     justify-content: left;
     font-size: 1rem;
-    color: #dcdcdc;
+    color: #7c0e0e;
 }
+
+header.container {
+    padding: 10px ; /* افزایش فاصله عمودی هدر */
+    color:rgb(165, 142, 135);
+
+}
+p{
+    font-family: b Badr;
+    font-size: larger;
+    text-align: center;
+    font-weight: bold;   
+}
+
+.navbar-nav-right {
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end; /* قرارگیری در سمت راست */
+}
+
+.navbar-nav-left {
+    margin-right: auto;
+    display: flex;
+    justify-content: flex-start; /* قرارگیری در سمت چپ */
+}
+#h1{
+    font-family: B Titr;
+    
+}
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.social-icon {
+    font-size: 24px;
+    color: #000;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.social-icon:hover {
+    color: #007bff;
+}
+
+.custom-icon {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    border-radius: 5px;
+}
+
+
+
