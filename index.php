@@ -65,6 +65,22 @@ include("heder.php");
         $conn->close();
         ?>
     </div>
+    <?php if (isset($_SESSION["role"]) && $_SESSION["role"] == 'admin') { ?>
+        <div class="text-center">
+            <form action="add.php" method="post" enctype="multipart/form-data" class="row justify-content-center">
+                <input type="hidden" name="page" value="page2"> <!-- افزودن فیلد صفحه -->
+                <div class="col-md-4 col-12">
+                    <input type="text" name="description" placeholder="توضیح" class="form-control mb-2" required>
+                </div>
+                <div class="col-md-4 col-12">
+                    <input type="file" name="image" class="form-control mb-2" required>
+                </div>
+                <div class="col-md-4 col-12">
+                    <button type="submit" class="btn btn-success w-100 mb-2">افزودن</button>
+                </div>
+            </form>
+        </div>
+        <?php } ?>
 </section>
 
 <style>
